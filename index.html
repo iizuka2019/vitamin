@@ -64,7 +64,7 @@
       var strDataW = '0';
       
       firebase.database().ref('/device/').on('value',function(snapshot) {
-        document.getElementById("Sittingtime").innerHTML = snapshot.child("status").val();
+        //document.getElementById("Sittingtime").innerHTML = snapshot.child("status").val();
 
         if(snapshot.child("status").val()>="3000") {
             document.getElementById("statusMan").innerHTML = "くさいよー"
@@ -81,7 +81,8 @@
         document.getElementById("st-sum").innerHTML = strdataH + "におい値"
         
         
-        document.getElementById("Standtime").innerHTML = snapshot.child("status").val();  
+        document.getElementById("st-sum").innerHTML ='10回';  
+        document.getElementById("Standtime").innerHTML ='5000';  
         document.getElementById("status").innerHTML =strYear + '年' + strMonth + '月' + strDay + '日'
         //document.getElementById("status").innerHTML ='2019年' + '09月' + '03日'
         document.getElementById("TargetDate-text").innerHTML =today
