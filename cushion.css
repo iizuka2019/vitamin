@@ -1,0 +1,144 @@
+
+body,table {
+  font-size: 14pt;
+  margin: 0pt;
+  text-align: center;
+  padding-top: 18pt;
+  background-color: #FFFFFF;
+  color: #696969;
+}
+
+
+.wrapper{
+    min-height: 100vh;
+    position: relative;/*←相対位置*/
+    padding-bottom: 120px;/*←footerの高さ*/
+    box-sizing: border-box;/*←全て含めてmin-height:100vhに*/
+}
+
+footer{
+    width: 100%;
+    background-color: #89c7de;
+    color: #fff;
+    text-align: center;
+    padding: 30px 0;
+  /*background-color: #0099ff;*/
+
+ position: absolute;/*←絶対位置*/
+    /*bottom: 0; 下に固定*/
+}
+
+input.liffinput  { 
+    font-size: 14pt;
+    font-family: "Montserrat", sans-serif;
+    text-align: center;
+    width: 50px;
+}
+
+input.liffRadio { 
+    width: 2em;
+    height: 2em;
+}
+
+
+
+
+
+
+.btn {
+    padding: 2pt;
+    font-size: 14pt;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+
+.btn-led-toggle {
+    box-shadow: 0 4pt 8pt 0 rgba(0,0,0,0.2), 0 3pt 10pt 0 rgba(0,0,0,0.19);
+    color: #0099ff; /* Light */
+    background-color: #f8f9fa; /* Tranig-End Red */
+    width: 80pt;
+    font-weight: bold;
+    height: 40pt;
+    border: 2pt solid black;
+    border-radius: 8pt;
+}
+
+.btn-led-toggle:active {
+    transform: translateY(4pt);
+    box-shadow: 0 2pt 4pt 0 rgba(0,0,0,0.2), 0 1pt 5pt 0 rgba(0,0,0,0.19);
+    background-color: #0099ff; /* Tranig-End Red */
+}
+
+.led-on, .led-on:active {
+    background-color: #16C464; /* LINE Green */
+}
+
+.btn-state {
+    box-shadow: 0pt 6pt #999;
+    border-radius: 4pt;
+    margin-bottom: 8pt;
+    width: 110pt;
+    border: 1pt solid #6c757d; /* Gray */
+    color: #6c757d; /* Gray */
+    background-color: #f8f9fa; /* Light */
+}
+
+.btn-state:active, .pressed {
+    color: #343a40; /* Dark */
+    border: 1pt solid #343a40; /* Dark */
+    box-shadow: 0 2pt #666;
+    transform: translateY(4pt);
+}
+
+.inactive {
+    color: #6c757d; /* Gray */
+}
+
+.success {
+    color: #ffffff; /* White LINE Green */
+}
+
+.error {
+    color: #dc3545; /* Red */
+}
+
+.hidden {
+    display: none;
+}
+
+.device-info-table {
+    width: 100%;
+    margin: auto;
+    padding: 0;
+}
+
+th{
+  width: 50%;
+  text-align: right;
+
+}
+
+td{
+  width: 50%;
+}
+
+
+.device-info-cell {
+    text-align: left;
+    vertical-align: middle;
+    padding-bottom: 8px;
+}
+
+.device-info-key {
+    padding-right: 10px;
+    word-wrap: none;
+}
+
+.device-info-val {
+    padding-left: 10px;
+    word-wrap: break-word;
+    max-width: 200px;
+    font-family: monospace, monospace;
+}

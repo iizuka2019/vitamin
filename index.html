@@ -1,0 +1,232 @@
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" type="text/css" href="cushion.css" />
+    <!--
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    -->
+    <link rel="stylesheet" href="css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/jquery.circliful.css">
+    <link rel="stylesheet" href="css/font-icon.css">
+    <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c" rel="stylesheet">
+    
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>すまほー</title>
+    <style type="text/css">
+      p.wf-roundedmplus1c { font-family: "M PLUS Rounded 1c";}
+      p.wf-roundedmplus1c_title {
+        font-family: "M PLUS Rounded 1c"
+        line-height : normal ;
+        border-bottom : 1px solid gray ;
+      }
+    </style>
+
+    
+   </head>
+
+  <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="js/jquery.circliful.js"></script>
+    
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAmSempEJ9w0lu8yYkFbdmpgI8nnlOC_YU",
+            authDomain: "enebular-motion.firebaseapp.com",
+            databaseURL: "https://enebular-motion.firebaseio.com",
+            projectId: "enebular-motion",
+            storageBucket: "",
+            messagingSenderId: "367617695978"
+        };
+        firebase.initializeApp(config);
+    </script>
+    
+    <script>
+    //読み込み処理
+      var today = new Date();
+      var strYear=today.getFullYear();
+      var strMonth=today.getMonth()+1;
+      var strDay=today.getDate();
+      var strDataW = '0';
+      
+      firebase.database().ref('/' + strYear + strMonth + strDay + '/').on('value',function(snapshot) {
+        document.getElementById("Sittingtime").innerHTML = snapshot.child("Sittingtime").val();
+
+        if(snapshot.child("Sittingtime").val()=="0秒") {
+            document.getElementById("statusMan").innerHTML = "いま、すわってないよー"
+        }else{
+            document.getElementById("statusMan").innerHTML = "いま、すわってるよ。"
+        }
+
+        strDataW=snapshot.child("stsum").val();
+        var strdataH =0;
+        strDataW =  Math.round((Number(strDataW)/60/60) * 10)/10;
+        strdataH =  strDataW;
+        strDataW =  (Number(strDataW)/8*100);
+        
+        document.getElementById("st-sum").innerHTML = strdataH + "時間／8時間"
+        
+        
+        document.getElementById("Standtime").innerHTML = snapshot.child("Standtime").val();  
+        document.getElementById("status").innerHTML =strYear + '年' + strMonth + '月' + strDay + '日'
+        //document.getElementById("status").innerHTML ='2019年' + '09月' + '03日'
+        document.getElementById("TargetDate-text").innerHTML =today
+      });
+
+      firebase.database().ref('/myinfo/').on('value',function(snapshot) {
+        $( document ).ready(function() { // 6,32 5,38 2,34
+          var svg=document.getElementById('test-circle7');
+          while (svg.firstChild)
+            svg.removeChild(svg.firstChild);
+          
+            $("#test-circle7").circliful({
+                animation: 0,
+                animationStep: 1,
+                animateInView: true,
+                percent: strDataW,
+                textSize: 28,
+                textStyle: 'font-size: 12px;',
+                textColor: '#666',
+                progressColor: {10: '#00A0E9', 20: '#009E96', 30: '#009944', 40: '#8FC31F', 50: '#FFF100', 60: '#F39800', 70: '#EA5532', 80: '#EA5532', 90:'#E91E63', 100:'#f44336'}
+            });
+          });
+      });
+    </script>
+    
+<section class="container">
+
+
+    <script>
+    //書き込み処理
+      var today = new Date();
+      var strYear=today.getFullYear();
+      var strMonth=today.getMonth()+1;
+      var strDate=today.getDate();
+            
+      var db = firebase.database();
+      
+      var myChatAll = db.ref("/myinfo/");
+      function changeData(){
+        var txtAge = document.getElementById("age-text").value;
+        var txtWeight = document.getElementById("weight-text").value;
+        
+        var element = document.getElementById("gender") ;
+        var elements = element.genders ;
+        var strGender =  "";
+
+        if (elements[0].checked == true){
+          strGender = 'male' ;
+        }else{
+          strGender = 'female' ;
+        }
+        //myChatAll.set({age:txtAge, genders:strGender,myweight:txtWeight,weight:"0.1",Sittingtime:"16" ,Standtime:"41"});
+        myChatAll.set({age:txtAge, genders:strGender,myweight:txtWeight});
+      }
+      
+    </script>
+  
+  
+    <script>
+      function handlerToggleLed(strLR) {
+        if(strLR == "left"){
+          var today = document.getElementById("TargetDate-text").innerHTML;
+          today.setDate(today.getDate() - 1);          
+          
+          var strYear=today.getFullYear();
+          var strMonth=today.getMonth()+1;
+          var strDay=today.getDate();
+          
+          document.getElementById("status").innerHTML =strYear + '年' + strMonth + '月' + strDay + '日'
+        }
+      }
+    </script>
+    
+    <!-- Title -->
+  
+<p class="wf-roundedmplus1c">
+  <a href="mypage.html">
+    <i class="fa fa-info-circle fa-lg"></i></a>CHILQ -シルク- </p>
+<hr>
+
+<p class="wf-roundedmplus1c">
+  <table class="device-info-table">
+    <tr>
+      <td colspan="2" align="center"><span id="status"  ></span></td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center"><span id="statusMan"  ></span></td>
+    </tr>
+  </table>
+</p>
+    
+      <input type="HIDDEN" name="TargetDate" id="TargetDate-text" >
+
+      <!-- Device Info Table -->
+<hr>
+  
+<p class="wf-roundedmplus1c">
+      <table class="device-info-table">
+        <tr>
+          <th>一日累計座位時間：</th>
+          <td class="liffinput" id="st-sum">秒</td>
+        </tr>
+        <tr>
+          <th>連続座位時間：</th>
+          <td class="liffinput" id="Sittingtime">秒</td>          
+        </tr>
+        <tr>
+          <td colspan="2" align="center">
+            <div class="col-lg-2">
+                <div id="test-circle7"></div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th>立上り回数/日：</th>
+          <td class="liffinput" id="Standtime">0</td>
+        </tr>
+      </table>
+</p>
+  
+
+ 
+<p class="wf-roundedmplus1c">
+<!--ツイートボタン-->
+<a id="twitter_button" >一日の結果をつぶやくよ。</a>
+</p>
+   
+<script>
+//ツイートボタンが押された時の処理
+$('#twitter_button').click(function() {
+    //出目をHTMLから取得する
+    var strSit = document.getElementById("st-sum").innerHTML;
+    var strStandCount = document.getElementById("Standtime").innerHTML;
+　　//ツイート内容をセット
+　　var tw_contents = ("結果報告：今日は" + strSit + "座っていたよ。立ち上がった回数は" + strStandCount + "回だよーやばいよー");
+　　var tw_tag = ("座ってる時間#立ち上がれ日本人");
+    var url = "https://www.takano-hw.com/";
+  //#twitter_buttonのhrefにパラメーターを渡す
+　　window.open().location.href = ("https://twitter.com/share?url=" + url + "&text=" + tw_contents + "&hashtags=" + tw_tag +"&count=none&lang=ja");
+});
+</script>
+  
+  
+  
+</section>
+    
+    
+  </body>
+
+</html>
