@@ -40,15 +40,17 @@
     
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
     
+    
     <script>
         // Initialize Firebase
+      
         var config = {
-            apiKey: "AIzaSyAmSempEJ9w0lu8yYkFbdmpgI8nnlOC_YU",
-            authDomain: "enebular-motion.firebaseapp.com",
-            databaseURL: "https://enebular-motion.firebaseio.com",
-            projectId: "enebular-motion",
+            apiKey: "AIzaSyDXDrbG_xTa2yozQWrn7mxxdLYXxl8Oho8",
+            authDomain: "memetan-gas.firebaseapp.com",
+            databaseURL: "https://memetan-gas.firebaseio.com",
+            projectId: "memetan-gas",
             storageBucket: "",
-            messagingSenderId: "367617695978"
+            messagingSenderId: "45071784092"
         };
         firebase.initializeApp(config);
     </script>
@@ -61,13 +63,13 @@
       var strDay=today.getDate();
       var strDataW = '0';
       
-      firebase.database().ref('/' + strYear + strMonth + strDay + '/').on('value',function(snapshot) {
+      firebase.database().ref('/device/').on('value',function(snapshot) {
         document.getElementById("Sittingtime").innerHTML = snapshot.child("Sittingtime").val();
 
-        if(snapshot.child("Sittingtime").val()=="0秒") {
-            document.getElementById("statusMan").innerHTML = "いま、すわってないよー"
+        if(snapshot.child("status").val()>="2000") {
+            document.getElementById("statusMan").innerHTML = "くさいよー"
         }else{
-            document.getElementById("statusMan").innerHTML = "いま、すわってるよ。"
+            document.getElementById("statusMan").innerHTML = "くさくないよー"
         }
 
         strDataW=snapshot.child("stsum").val();
@@ -83,9 +85,7 @@
         document.getElementById("status").innerHTML =strYear + '年' + strMonth + '月' + strDay + '日'
         //document.getElementById("status").innerHTML ='2019年' + '09月' + '03日'
         document.getElementById("TargetDate-text").innerHTML =today
-      });
 
-      firebase.database().ref('/myinfo/').on('value',function(snapshot) {
         $( document ).ready(function() { // 6,32 5,38 2,34
           var svg=document.getElementById('test-circle7');
           while (svg.firstChild)
@@ -102,42 +102,13 @@
                 progressColor: {10: '#00A0E9', 20: '#009E96', 30: '#009944', 40: '#8FC31F', 50: '#FFF100', 60: '#F39800', 70: '#EA5532', 80: '#EA5532', 90:'#E91E63', 100:'#f44336'}
             });
           });
+        
       });
+
     </script>
     
 <section class="container">
 
-
-    <script>
-    //書き込み処理
-      var today = new Date();
-      var strYear=today.getFullYear();
-      var strMonth=today.getMonth()+1;
-      var strDate=today.getDate();
-            
-      var db = firebase.database();
-      
-      var myChatAll = db.ref("/myinfo/");
-      function changeData(){
-        var txtAge = document.getElementById("age-text").value;
-        var txtWeight = document.getElementById("weight-text").value;
-        
-        var element = document.getElementById("gender") ;
-        var elements = element.genders ;
-        var strGender =  "";
-
-        if (elements[0].checked == true){
-          strGender = 'male' ;
-        }else{
-          strGender = 'female' ;
-        }
-        //myChatAll.set({age:txtAge, genders:strGender,myweight:txtWeight,weight:"0.1",Sittingtime:"16" ,Standtime:"41"});
-        myChatAll.set({age:txtAge, genders:strGender,myweight:txtWeight});
-      }
-      
-    </script>
-  
-  
     <script>
       function handlerToggleLed(strLR) {
         if(strLR == "left"){
