@@ -177,7 +177,7 @@
  
 <p class="wf-roundedmplus1c">
 <!--ツイートボタン-->
-<a id="twitter_button" >一日の結果をつぶやくよ。</a>
+<a id="twitter_button" >きょうのけっかをつぶやくよ。</a>
 </p>
    
 <script>
@@ -187,8 +187,8 @@ $('#twitter_button').click(function() {
     var strSit = document.getElementById("st-sum").innerHTML;
     var strStandCount = document.getElementById("Standtime").innerHTML;
 　　//ツイート内容をセット
-　　var tw_contents = ("結果報告：今日は" + strSit + "座っていたよ。立ち上がった回数は" + strStandCount + "回だよーやばいよー");
-　　var tw_tag = ("座ってる時間#立ち上がれ日本人");
+　　var tw_contents = ("結果報告：今日は" + strSit + "回だよーやばいよー");
+　　var tw_tag = ("座ってる時間");
     var url = "https://www.takano-hw.com/";
   //#twitter_buttonのhrefにパラメーターを渡す
 　　window.open().location.href = ("https://twitter.com/share?url=" + url + "&text=" + tw_contents + "&hashtags=" + tw_tag +"&count=none&lang=ja");
