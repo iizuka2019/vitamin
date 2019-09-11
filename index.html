@@ -69,7 +69,7 @@
       firebase.database().ref('/device/').on('value',function(snapshot) {
         //document.getElementById("Sittingtime").innerHTML = snapshot.child("status").val();
 
-        if(snapshot.child("status").val()>="3000") {
+        if(snapshot.child("status").val()>="3200") {
             document.getElementById("statusMan").innerHTML = "くさいよー"
         }else{
             document.getElementById("statusMan").innerHTML = "くさくないよー"
